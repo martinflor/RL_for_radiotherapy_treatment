@@ -35,13 +35,14 @@ python application.py
 </details>
 
 ## Results
-<center>
+<div align="center">
 |                | Radio of 0.8 | Radio of 0.7 | Radio of 0.6 | Cell cycle of 24h | Cell cycle of 20h | Cell cycle of 18h | Cell cycle of 16h |
 |:--------------:|:------------:|:------------:|:------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
 |    Baseline    |    -52.4%    |    -51.0%    |    -33.2%    |       -55.0%      |       -62.3%      |       -59.0%      |       -50.3%      |
 | Selected Agent |    +23.3%    |    -10.5%    |    -22.7%    |       -8.36%      |       +26.4%      |       +8.59%      |       +8.90%      |
-</center>
+</div>
 
+<div align="center">
 | Environment              | TCP (\%) | Dose (Gy) | Fractions (-) | Duration (h) | Survival (\%) |
 |-----------------------------------|:-----------------:|:------------------:|:----------------------:|:---------------------:|:----------------------:|
 | Radiosensitivity of 0.50 |        90.0       |    113.7 ± 21.77   |       34.7 ± 8.49      |     832.1 ± 203.76    |          93.5          |
@@ -58,7 +59,7 @@ python application.py
 | Cell Cycle of 18 hours   |       100.0       |     47.0 ± 6.76    |       15.0 ± 2.65      |     360.2 ± 63.54     |          90.7          |
 | Cell Cycle of 20 hours   |       100.0       |    47.9 ± 13.19    |       16.2 ± 7.48      |     387.8 ± 179.5     |          91.3          |
 | Cell Cycle of 24 hours   |       100.0       |    42.6 ± 13.10    |       15.4 ± 8.55      |     369.6 ± 205.1     |          93.7          |
-
+</div>
 ## License
 
 [EPL]()
