@@ -73,10 +73,10 @@ python application.py
 
 The baseline treatment corresponds to a radiotherapy treatment where a dose of 2 Gy is given every 24 hours to the patient. We compare the performance of our automatic decision-making architecture with the baseline treatment :
 
-   |                | Radio of 0.8 | Radio of 0.7 | Radio of 0.6 | Cell cycle of 24h | Cell cycle of 20h | Cell cycle of 18h | Cell cycle of 16h |
-   |:--------------:|:------------:|:------------:|:------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
-   |    Baseline    |    -52.4%    |    -51.0%    |    -33.2%    |       -55.0%      |       -62.3%      |       -59.0%      |       -50.3%      |
-   | Selected Agent |    +23.3%    |    -10.5%    |    -22.7%    |       -8.36%      |       +26.4%      |       +8.59%      |       +8.90%      |
+|                | Radiosensitivity of 0.8 | Radiosensitivity of 0.7 | Radiosensitivity of 0.6 | Cell cycle of 24h | Cell cycle of 20h | Cell cycle of 18h | Cell cycle of 16h |
+|:--------------:|:-----------------------:|:-----------------------:|:-----------------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
+|    Baseline    |         -52.4\%         |         -51.0\%         |         -33.2\%         |      -55.0\%      |      -62.3\%      |      -59.0\%      |      -50.3\%      |
+| Selected Agent |         +23.3\%         |         -10.5\%         |         -22.7\%         |      -8.36\%      |      +26.4\%      |      +8.59\%      |      +8.90\%      |
 
 
 ## License
