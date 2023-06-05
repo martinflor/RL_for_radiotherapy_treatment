@@ -1,0 +1,7 @@
+A Linear Quadratic function is used to model the response of cancer cells to radiotherapy. The stage duration plays a significant role in determining the likelihood that a radiation dose will be administered at a specific stage. 
+
+For example, the Mitosis phase is consistently the shortest phase, lasting approximately an hour. 
+
+Consequently, it is less probable that the majority of cells will be in this stage when the radiation dose is administered. 
+
+To account for this, a weighted average is calculated to represent the radiosensitivity across the entire cell cycle (excluding the quiescence state).

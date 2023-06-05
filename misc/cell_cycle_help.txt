@@ -1,0 +1,9 @@
+The Cell Cycle is a series of events that take place in a cell leading to its division and duplication. It is composed of four distinct phases: Gap 1, Synthesis, Gap 2, and Mitosis. In animal cells, this cycle typically lasts for an average of 24 hours.
+
+The duration of each phase can be adjusted by the user, but only integer values are accepted. The initial cell cycle has a baseline duration of 24 hours, and healthy cells maintain this cycle length. On the other hand, cancer cells have a modified cycle length as determined by the user.
+
+For animal cells, the duration of Gap 1 can vary between 5 to 12 hours, while Synthesis typically lasts for 8 to 10 hours. Gap 2 usually takes 2 to 4 hours, and the Mitosis phase is typically the shortest, lasting only 1 hour.
+
+The phase of the cell cycle that can vary the most in duration is the Gap 1 phase, while the Mitotic phase is always relatively short.
+
+To illustrate the proportions and duration of each phase, a plot with two sub-pie charts can be used. The first sub-pie chart represents the baseline cycle with a duration of 24 hours, while the second sub-pie chart shows the modified cycle with the adjusted phase durations.

@@ -1,0 +1,8 @@
+In the Nutrient section, you can adjust the nutrient consumption of the cells in the simulation. Specifically, you can modify the mean value of the glucose absorption and oxygen consumption for the cells.
+
+A plot is available to show the normal distribution from which the cells' nutrient consumption is derived. By changing the mean values of the nutrient consumption, you can adjust the distribution and simulate different scenarios for nutrient availability.
+
+In addition to adjusting the nutrient consumption distribution, the quiescent and critical levels of the cells are updated. The quiescent level is the threshold at which cells enter the quiescent stage, while the critical level is the threshold at which cells will die if the surrounding nutrient levels are below it.
+
+By modifying the nutrient consumption and adjusting the quiescent and critical levels, you can simulate and explore different scenarios to study the impact of nutrient availability on cell behavior and survival in the simulation.
+                      
