@@ -34,6 +34,34 @@ python application.py
 </p></p>
 </details>
 
+<details>
+   <summary>Nutrients Page</summary>
+   <p><p align="center">
+<img src="images/nutrients_page.png" border="10"/>
+</p></p>
+</details>
+
+<details>
+   <summary>Cell Cycle Page</summary>
+   <p><p align="center">
+<img src="images/cell_cycle_page.png" border="10"/>
+</p></p>
+</details>
+
+<details>
+   <summary>Radiosensitivity Page</summary>
+   <p><p align="center">
+<img src="images/radiosensitivity_page.png" border="10"/>
+</p></p>
+</details>
+
+<details>
+   <summary>Classifier Page</summary>
+   <p><p align="center">
+<img src="images/classifier_page.png" border="10"/>
+</p></p>
+</details>
+
 ## Results
 
 The baseline treatment corresponds to a radiotherapy treatment where a dose of 2 Gy is given every 24 hours to the patient. We compare the performance of our automatic decision-making architecture with the baseline treatment :
