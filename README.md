@@ -36,28 +36,13 @@ python application.py
 
 ## Results
 
+The baseline treatment corresponds to a radiotherapy treatment where a dose of 2 Gy is given every 24 hours to the patient. We compare the performance of our automatic decision-making architecture with the baseline treatment :
+
    |                | Radio of 0.8 | Radio of 0.7 | Radio of 0.6 | Cell cycle of 24h | Cell cycle of 20h | Cell cycle of 18h | Cell cycle of 16h |
    |:--------------:|:------------:|:------------:|:------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
    |    Baseline    |    -52.4%    |    -51.0%    |    -33.2%    |       -55.0%      |       -62.3%      |       -59.0%      |       -50.3%      |
    | Selected Agent |    +23.3%    |    -10.5%    |    -22.7%    |       -8.36%      |       +26.4%      |       +8.59%      |       +8.90%      |
 
-
-| Environment              | TCP (\%) | Dose (Gy) | Fractions (-) | Duration (h) | Survival (\%) |
-|-----------------------------------|:-----------------:|:------------------:|:----------------------:|:---------------------:|:----------------------:|
-| Radiosensitivity of 0.50 |        90.0       |    113.7 ± 21.77   |       34.7 ± 8.49      |     832.1 ± 203.76    |          93.5          |
-| Radiosensitivity of 0.55 |       100.0       |    91.3 ± 16.92    |       27.6 ± 5.92      |     662.6 ± 142.06    |          93.7          |
-| Radiosensitivity of 0.6  |       100.0       |    85.05 ± 19.30   |       26.2 ± 7.17      |     628.8 ± 172.1     |          93.8          |
-| Radiosensitivity of 0.66 |       100.0       |    79.52 ± 14.80   |       24.9 ± 5.85      |     597.1 ± 140.4     |          94.6          |
-| Radiosensitivity of 0.72 |       100.0       |    61.26 ± 9.71    |       18.96 ± 3.7      |      455.0 ± 88.2     |          93.9          |
-| Radiosensitivity of 0.80 |       100.0       |    59.54 ± 11.22   |      18.25 ± 3.97      |     438.0 ± 95.30     |          93.7          |
-| Cell Cycle of 8 hours    |        0.0        |    87.59 ± 33.4    |       35.21 ± 6.6      |     845.0 ± 159.0     |           0.0          |
-| Cell Cycle of 10 hours   |        72.0       |    121.3 ± 36.2    |      40.52 ± 12.6      |     972.5 ± 303.4     |          62.0          |
-| Cell Cycle of 12 hours   |        98.0       |    76.30 ± 18.68   |       24.37 ± 7.2      |     584.9 ± 172.7     |          84.7          |
-| Cell Cycle of 14 hours   |       100.0       |    51.93 ± 11.73   |       16.48 ± 4.6      |     395.5 ± 109.5     |          87.3          |
-| Cell Cycle of 16 hours   |       100.0       |     44.53 ± 7.8    |       14.25 ±3.0       |      342.0 ± 72.3     |          91.0          |
-| Cell Cycle of 18 hours   |       100.0       |     47.0 ± 6.76    |       15.0 ± 2.65      |     360.2 ± 63.54     |          90.7          |
-| Cell Cycle of 20 hours   |       100.0       |    47.9 ± 13.19    |       16.2 ± 7.48      |     387.8 ± 179.5     |          91.3          |
-| Cell Cycle of 24 hours   |       100.0       |    42.6 ± 13.10    |       15.4 ± 8.55      |     369.6 ± 205.1     |          93.7          |
 
 ## License
 
