@@ -62,6 +62,13 @@ python application.py
 </p></p>
 </details>
 
+<details>
+   <summary>Simulation Page</summary>
+   <p><p align="center">
+<img src="images/simulation_page.png" border="10"/>
+</p></p>
+</details>
+
 ## Results
 
 The baseline treatment corresponds to a radiotherapy treatment where a dose of 2 Gy is given every 24 hours to the patient. We compare the performance of our automatic decision-making architecture with the baseline treatment :
