@@ -28,9 +28,9 @@ python application.py
 ```
 
 <details>
-   <summary>Title 1</summary>
+   <summary>Home Page</summary>
    <p><p align="center">
-<img src="app/images/EPL.jpg" width="100" height="100" border="10"/>
+<img src="images/treatment_page.png" width="100" height="100" border="10"/>
 </p></p>
 </details>
 
