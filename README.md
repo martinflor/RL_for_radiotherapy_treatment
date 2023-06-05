@@ -30,7 +30,7 @@ python application.py
 <details>
    <summary>Home Page</summary>
    <p><p align="center">
-<img src="images/treatment_page.png" width="1440" height="1080" border="10"/>
+<img src="images/treatment_page.png" width="1440" height="500" border="10"/>
 </p></p>
 </details>
 
