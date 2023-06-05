@@ -1,39 +1,21 @@
-# RL_for_radiotherapy_treatment
+# Reinforcement learning optimization for radiotherapy treatments
 Reinforcement Learning Open-Source Project for Radiotherapy Treatments. 
 
-# Foobar
 
-Foobar is a Python library for dealing with word pluralization.
 
-## Installation
+## Key points
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
-```bash
-pip install foobar
-```
+
+## Description
+
+We used a cellular model that results from the combination of a cellular model developed by [A. Jalalimanesh](https://www.sciencedirect.com/science/article/abs/pii/S0378475416300878) and another one developed by [O'Neil](https://scholarscompass.vcu.edu/etd/2831/). Reinforcement learning algorithms (Q-learning, Sarsa and Expected Sarsa) are used to provide optimizations on radiotherapy treatments. The goal of this work is to generate superior radiotherapy treatment plans concerning Tumor Control Probability (TCP), number of radiation fractions, total radiation dose, treatment duration, and healthy cell survival rate.
 
 ## Usage
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```anaconda
+python application.py
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## License
 
