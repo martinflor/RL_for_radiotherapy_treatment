@@ -34,9 +34,7 @@ class auto_robust_agent_selection:
         
         self.current_stage = 0
         
-
-        
-    def update_agent(self, predicted_class, predicted_tcp, confidence_class, confidence_tcp, current_name, current_path):
+    def update_agent(self, predicted_class, predicted_tcp, confidence_class, current_name, current_path):
         
         if not predicted_class and confidence_class > 59.0:
             if self.current_stage == 0:

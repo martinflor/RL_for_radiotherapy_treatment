@@ -13,6 +13,7 @@ import time
 import pickle
 import os
 import pandas as pd
+import torch
 
 from model.environment import GridEnv
 from model.cell import HealthyCell, CancerCell, OARCell, Cell
@@ -21,6 +22,8 @@ from pages.agent import *
 from pages.auto_robust import auto_robust_agent_selection
 from pages.Sidebar import SidebarSimulation
 from pages.treatment_tab import TreatmentTab
+from model.CNN.CNN_classifier import BinaryClassifier
+
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -60,9 +63,16 @@ class SimulationPage(customtkinter.CTkFrame):
         self.path = self.params[5]
         if self.params[8] == "on":
             self.auto_robust = True
+            print("Auto-Robust Mode On")
             self.auto_robust_agent = auto_robust_agent_selection(self.name)
         else:
             self.auto_robust = False
+            
+        if self.params[9] == 'RF':
+            print("RF classifier selected")
+        else:
+            print("CNN classifier selected")
+
             
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
@@ -97,10 +107,14 @@ class SimulationPage(customtkinter.CTkFrame):
         self.predict_tcp = customtkinter.CTkLabel(self.master, text=f"Predicted TCP : /", anchor="w", font=customtkinter.CTkFont(size=16, weight="bold"))
         self.predict_tcp.place(relx=0.86, rely=init+4*step, relwidth=0.125, relheight=0.05)
         
-        self.agent_plot = customtkinter.CTkButton(self.master, text="Agents on Plot", command=self.agent_on_plot)
+        self.agent_on_plot_bool = customtkinter.StringVar(value=False)
+        self.agent_plot = customtkinter.CTkCheckBox(self.master, text="Agents on Plot",
+                                     variable=self.agent_on_plot_bool, onvalue=True, offvalue=False, font=customtkinter.CTkFont(size=14, weight="bold"))
+        
+        #self.agent_plot = customtkinter.CTkButton(self.master, text="Agents on Plot", command=self.agent_on_plot)
         self.agent_plot.place(relx=0.86, rely=init+5*step, relwidth=0.125, relheight=0.035)
         
-        self.env_summary = customtkinter.CTkButton(self.master, text="Environment Summary", command=self.environment_summary)
+        self.env_summary = customtkinter.CTkButton(self.master, text="Simulation Summary", command=self.environment_summary)
         self.env_summary.place(relx=0.86, rely=init+5.5*step, relwidth=0.125, relheight=0.035)
         
         self.retrain_button = customtkinter.CTkButton(self.master, text="Retrain", command=self.retrain_agent)
@@ -200,20 +214,12 @@ class SimulationPage(customtkinter.CTkFrame):
         
         self.slider_speed.set(3)
         
-        
-        # Loading Classifier
-        print("Loading Classifier")
-        with open('model/classifier_large_data.pickle', 'rb') as file:
-                self.clf = pickle.load(file)
                 
         self.agents = []
         self.agent_changes = []
         
         # call the update function after a delay
         self.update()
-        
-    def agent_on_plot(self):
-        self.agent_on_plot_bool = not self.agent_on_plot_bool
         
     def environment_summary(self):
         pass
@@ -293,8 +299,8 @@ class SimulationPage(customtkinter.CTkFrame):
                         if ((self.idx-(self.start_hour-24))%24 == 0):
                             print(self.environment.time)
                             state = self.environment.convert(self.environment.observe())
-                            action = self.choose_action(state)
-                            reward = self.environment.act(action)
+                            self.action = self.choose_action(state)
+                            reward = self.environment.act(self.action)
                     elif (self.start_hour is None):
                         if (CancerCell.cell_count > 9000):
                             self.start_hour = self.environment.time
@@ -419,7 +425,7 @@ class SimulationPage(customtkinter.CTkFrame):
              transform = self.cancer_plot.transAxes)
         self.cancer_plot.plot(self.time_arr[:i+1], self.cancer_arr[:i+1], label="Cancer", color="r")
         
-        if (self.agent_on_plot_bool) and (self.start_hour is not None):
+        if (self.agent_on_plot_bool.get()) and (self.start_hour is not None):
             for idx, item in enumerate(self.agent_changes):
                 x_max, y_max = self.time_arr[-1], np.max(self.cancer_arr[:self.start_hour])
                 self.cancer_plot.axvline(x=item, color='b')
@@ -442,11 +448,73 @@ class SimulationPage(customtkinter.CTkFrame):
         start_hour = next(idx for idx, item in enumerate(self.dose_arr) if item != 0) - 1
         if self.dose_arr[i] != 0:
             if (i-start_hour > 5):
-                self.predict_classifier(self.cancer_arr, self.clf)
+                if self.params[9] == 'RF':
+                    self.predict_classifier(self.environment.cancer_arr)
+                else:
+                    self.predict_cnn(self.action)
+                    
                 
         self.fig.canvas.draw()
         
-    def predict_classifier(self, ccells, clf):
+    def predict_cnn(self, action):
+        i = self.environment.time
+        start_hour = self.environment.start_time
+        def get_cnn():
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            model = BinaryClassifier(3,3).to(device)
+            if (i-start_hour) < 30:
+                model.load_state_dict(torch.load('model\\CNN\\cnn_dose1_74%.pt'))
+                return model
+            elif (i-start_hour) < 50:
+                model.load_state_dict(torch.load('model\\CNN\\cnn_dose2_77%.pt'))
+                return model
+            elif (i-start_hour) < 75:
+                model.load_state_dict(torch.load('model\\CNN\\cnn_dose3_82%.pt'))
+                return model
+            elif (i-start_hour) < 100:
+                model.load_state_dict(torch.load('model\\CNN\\cnn_dose4_86%.pt'))
+                return model
+            else:
+                model.load_state_dict(torch.load('model\\CNN\\cnn_dose5_87%.pt'))
+                return model
+
+        model = get_cnn()
+        output = model(torch.tensor(np.expand_dims(np.array(self.environment.grid_arr[i-1]).transpose(2,0,1), axis=0), dtype=torch.float32), torch.tensor(np.expand_dims([start_hour, action+1, self.environment.total_dose],axis=0), dtype=torch.float32))
+        _, y_pred = torch.max(output,1)
+        print(y_pred)
+        
+        if not y_pred: # Predict if tcp is 100.0 or not (binary classification)
+            self.retrain_early.configure(text=f"Re-train Early : \n     Yes")
+        else:
+            self.retrain_early.configure(text=f"Re-train Early : \n     No")
+        
+        if self.auto_robust:
+            if self.environment.count_dose == 2:
+                self.environment.count_dose = 0
+                self.name, self.path = self.auto_robust_agent.update_agent(y_pred, 
+                                                                           100.0,
+                                                                           100.0,
+                                                                           self.name,
+                                                                           self.path)
+                if self.name != 'Baseline':
+                    self.load_q_table()
+        
+    def predict_classifier(self, ccells):
+        i = self.environment.time
+        start_hour = self.environment.start_time
+        if (i-start_hour < 50):
+            with open('model\\RF\\classifier_5h_86.5%.pickle', 'rb') as file:
+                clf = pickle.load(file)
+        if (i-start_hour < 120):
+            with open('model\\RF\\classifier_50h_91%.pickle', 'rb') as file:
+                clf = pickle.load(file)
+        if (i-start_hour < 150):
+            with open('model\\RF\\classifier_120h_92.3%.pickle', 'rb') as file:
+                clf = pickle.load(file)
+        if (i-start_hour >= 150):
+            with open('model\\RF\\classifier_150h_93.5%.pickle', 'rb') as file:
+                clf = pickle.load(file)
+        
         data = {"mean" : [],
                 "median" : [],
                 "max" : [],
@@ -495,7 +563,6 @@ class SimulationPage(customtkinter.CTkFrame):
                 self.name, self.path = self.auto_robust_agent.update_agent(y_pred[0], 
                                                                            y_pred_tcp[0],
                                                                            100*np.max(y_pred_proba),
-                                                                           y_pred_tcp_percent[0],
                                                                            self.name,
                                                                            self.path)
                 if self.name != 'Baseline':

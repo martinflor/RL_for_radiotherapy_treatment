@@ -14,7 +14,6 @@ import webbrowser
 import os
 import pandas as pd
 
-
 from model.environment import GridEnv
 from pages.simulationPage import SimulationPage
 from pages.helpPage import help_page
@@ -95,12 +94,12 @@ class App(customtkinter.CTk):
         
         # Classifier
         
-        self.str_classifier = customtkinter.StringVar()
+        self.str_classifier = customtkinter.StringVar(value="CNN")
         self.ckeck_cnn = customtkinter.CTkRadioButton(self.tabview.tab("Classifier"), text="CNN Classifier",
-                                     variable=self.str_classifier)
+                                     variable=self.str_classifier, value="CNN")
 
         self.ckeck_rf = customtkinter.CTkRadioButton(self.tabview.tab("Classifier"), text="Random Forest Classifier",
-                                     variable=self.str_classifier)
+                                     variable=self.str_classifier, value="RF")
         
         self.ckeck_cnn.place(relx=0.65, rely=0.025, relwidth=0.3, relheight=0.1)
         self.ckeck_rf.place(relx=0.16, rely=0.025, relwidth=0.3, relheight=0.1)
@@ -247,10 +246,8 @@ class App(customtkinter.CTk):
         file_name = self.treatment_tab.combobox_1.get()
         file_list = pd.concat([list_agent(), list_agent2(), list_agent3()])
         path = file_list[file_list["name"]==file_name]["path"].iloc[0]
-                
-        print(self.str_classifier.get())
         
-        params = self.get_values(value_type='float', fields=self.fields, entries=self.entries) + [file_name, path, self.get_values(value_type='int', fields=self.fields_cc, entries=self.entries_cc), self.get_values(value_type='float', fields=self.fields_radio, entries=self.entries_radio), self.str_robust.get()]
+        params = self.get_values(value_type='float', fields=self.fields, entries=self.entries) + [file_name, path, self.get_values(value_type='int', fields=self.fields_cc, entries=self.entries_cc), self.get_values(value_type='float', fields=self.fields_radio, entries=self.entries_radio), self.str_robust.get(), self.str_classifier.get()]
         self.simulation = SimulationPage(self, params)
         
     def quit_page(self):
