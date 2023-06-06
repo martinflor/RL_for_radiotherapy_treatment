@@ -79,6 +79,17 @@ The baseline treatment corresponds to a radiotherapy treatment where a dose of 2
 | Selected Agent |         +23.3\%         |         -10.5\%         |         -22.7\%         |      -8.36\%      |      +26.4\%      |      +8.59\%      |      +8.90\%      |
 
 
+## Dependencies
+- customtkinter : 5.1.2
+- numpy         : 1.24.3
+- matplotlib    : 3.5.3
+- seaborn       : 0.12.1
+- scipy         : 1.10.1
+- torch         : 2.0.1
+- sklearn       : 1.2.2
+- pandas        : 1.1.3
+- PIL           : 9.2.0
+
 ## License
 
 [EPL]()
